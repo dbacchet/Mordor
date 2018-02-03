@@ -1,0 +1,21 @@
+CFLAGS=-Wall -Werror
+CDEFINES=
+ifeq (@(BUILD_MODE),Debug)
+CFLAGS += -g -O0
+CDEFINES += -DBUILD_MODE="Debug"
+else
+CFLAGS += -O2
+CDEFINES += -DBUILD_MODE="Release"
+endif
+
+# common rule for compiling
+!cc = |> gcc $(CFLAGS) $(CDEFINES) -c %f -o %o |> %B.o
+# common rule for linking
+!ld = |> gcc $(CFLAGS) $(CDEFINES) %f -o %o |>
+
+# codegen
+: |> sh gen_triangle.sh %o |> triangle.h
+# compile
+: foreach *.c | triangle.h |> !cc |>
+# link: for '*.o' to work, it must be _after_ the rule that declares the .o files
+: *.o |> !ld |> hello
