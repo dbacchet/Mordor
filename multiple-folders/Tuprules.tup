@@ -1,0 +1,29 @@
+CC=gcc
+CXX=g++
+
+CFLAGS=-Wall -Werror
+DEFINES=
+INCLUDES=-I.
+LIBPATH=
+LIBS=
+
+ifeq (@(BUILD_MODE),Debug)
+CFLAGS += -g -O0
+DEFINES += -DBUILD_MODE="Debug"
+else
+CFLAGS += -O2
+DEFINES += -DBUILD_MODE="Release"
+endif
+
+# common rule for compiling
+!cc = |> $(CXX) $(CFLAGS) $(DEFINES) $(INCLUDES) -c %f -o %o |> %B.o
+# common rule for linking
+!ld = |> $(CXX) $(CFLAGS) $(DEFINES) $(INCLUDES) $(LIBPATH) $(LIBS) %f -o %o |>
+# create a static library
+!stlib = |> ar crs %o %f |>
+# create a static library
+!shlib = |> $(CXX) -shared -fPIC $(LIBPATH) $(LIBS) %f -o %o |>
+# create a program
+!program = |> $(CXX) $(CFLAGS) $(DEFINES) $(INCLUDES) $(LIBPATH) $(LIBS) %f -o %o |>
+
+

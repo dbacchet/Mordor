@@ -1,0 +1,8 @@
+include_rules
+
+INCLUDES += -I..
+LIBPATH += -L../mystlib -L../myshlib
+LIBS += -lmystlib -lmyshlib
+: app_main.cpp |> !cc |>
+: foreach *.o | ../mystlib/libmystlib.a ../myshlib/libmyshlib.so |> !program |> app
+
