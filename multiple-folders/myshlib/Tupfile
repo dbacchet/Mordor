@@ -1,4 +1,5 @@
 include_rules
 
 : foreach *.c* |> !cc |>
-: *.o |> !shlib |> libmyshlib.so
+# here we link and also create the group <myshlib> (with a single file in it) to simplify the link name in myapp
+: *.o |> !shlib |> libmyshlib.so <myshlib>

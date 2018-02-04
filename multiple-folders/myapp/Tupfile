@@ -4,5 +4,6 @@ INCLUDES += -I..
 LIBPATH += -L../mystlib -L../myshlib
 LIBS += -lmystlib -lmyshlib
 : app_main.cpp |> !cc |>
-: foreach *.o | ../mystlib/libmystlib.a ../myshlib/libmyshlib.so |> !program |> app
+# need to find a way to pass the root folder directly to the program macro
+: foreach *.o | ../mystlib/libmystlib.a &(root)/myshlib/<myshlib> |> !program |> app
 
