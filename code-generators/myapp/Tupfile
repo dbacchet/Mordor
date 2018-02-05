@@ -1,0 +1,10 @@
+include_rules
+
+INCLUDES += -I..
+
+: pippo.codegen |> $(CODEGEN) %B |> generated/c/pippo.h generated/c/pippo.cpp
+
+: foreach app_main.cpp generated/c/pippo.cpp | generated/c/pippo.h |> !cc |>
+# need to find a way to pass the root folder directly to the program macro
+: *.o |> !program |> app
+

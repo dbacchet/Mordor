@@ -6,5 +6,5 @@ LIBPATH += -L$(ROOT)/myshlib
 LIBS += -lmystlib -lmyshlib
 : app_main.cpp |> !cc |>
 # need to find a way to pass the root folder directly to the program macro
-: foreach *.o | $(ROOT)/mystlib/libmystlib.a &(root)/myshlib/<myshlib> |> !program |> app
+: *.o | $(ROOT)/mystlib/libmystlib.a &(root)/myshlib/<myshlib> |> !program |> app
 
