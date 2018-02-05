@@ -27,3 +27,4 @@ endif
 !program = |> ^ link %o^ $(CXX) $(CFLAGS) $(DEFINES) $(INCLUDES) $(LIBPATH) $(LIBS) %f -o %o |>
 
 &root = .
+ROOT = $(TUP_CWD)

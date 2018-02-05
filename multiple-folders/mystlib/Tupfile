@@ -1,4 +1,4 @@
 include_rules
 
 : foreach *.c* |> !cc |>
-: *.o |> !stlib |> libmystlib.a
+: *.o |> !stlib |> libmystlib.a <mystlib>

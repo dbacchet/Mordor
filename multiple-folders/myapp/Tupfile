@@ -1,9 +1,10 @@
 include_rules
 
 INCLUDES += -I..
-LIBPATH += -L../mystlib -L../myshlib
+LIBPATH += -L$(ROOT)/mystlib
+LIBPATH += -L$(ROOT)/myshlib
 LIBS += -lmystlib -lmyshlib
 : app_main.cpp |> !cc |>
 # need to find a way to pass the root folder directly to the program macro
-: foreach *.o | ../mystlib/libmystlib.a &(root)/myshlib/<myshlib> |> !program |> app
+: foreach *.o | $(ROOT)/mystlib/libmystlib.a &(root)/myshlib/<myshlib> |> !program |> app
 
